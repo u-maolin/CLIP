@@ -1,0 +1,56 @@
+variable	feature_use	feature_description
+patientID	data organization	Subject ID unique to a given subject
+lookup	data organization	Lookup ID unique to a given variant and sample
+variant	data organization	Variant ID
+Case	data organization	Sample ID unique to a given subject and plasma sample
+Variant.type	data filtering	Type of base substitution (e.g. synonymous, missense…etc)
+Chr	data organization	Chromosome
+Position	variant information	Genomic coordinate of the variant (hg19)
+Tumor.allele	variant information	Tumor allele
+Ref..allele	variant information	Reference allele
+variant_count_norm	SNV model feature	Custom blacklist statistic #1
+tumor_adjudicated	data organization	Binary variable denoting whether a variant is present in the patients matched tumor biopsy sample. This is used to label the variant in the the semi-supervised tumor-adjudicated SNV model. See the Supplementary Methods for more details.
+has_matched_tumor	data organization	Binary variable denoting whether a patient's matched tumor biopsy sample was analyzed. Used to determine which samples are considered in the semi-supervised tumor-adjudicated SNV model. See the Supplementary Methods for more details.
+ontarget_shoulder_tile_mut_count_norm	SNV model feature	Custom blacklist statistic #2
+cosmic_lung_count	data filtering	Number of occurrences in lung cancer samples in the COSMIC database (CosmicGenomeScreens v85)
+blacklist3tumorsupressor	data filtering	Binary variable denoting whether a mutation in a putative tumor suppressor gene is nonsynonymous. Putative tumor suppressor genes were those determined to be a "tumor suppressor gene" or "likely tumor suppressor gene" in LUAD or LUSC by Bailey et al. Comprehensive Characterization of Cancer Driver Genes and Mutations. Cell 2018. The genes meeting this criteria covered by our sequencing panel are NF1, TP53, CDKN2A, RB1, NOTCH1, and ARID1A.
+cosmic_total_count	not used	Total number of occurrences in the COSMIC database (CosmicGenomeScreens v85)
+cohort	data organization	Prefix of the subject ID, used to stratify subjects into case:control and training:validation cohorts
+blacklist1_oncogenes	data filtering	Binary variable denoting whether a mutations in the following lung cancer oncogenes was observed in one or more lung cancer cases in COSMIC (CosmicGenomeScreens v85): EGFR, KRAS, PIK3CA, BRAF, MET, U2AF1, NFE2L2, TERT, ERBB2, HRAS, NRAS, TERT, RAF1
+pass_basic_QC	data filtering	Binary variable denoting whether a variant passes the filtering rules described in the "Error suppression and variant calling" section of the Methods.
+intersect_unpadded_selector	data filtering	1 = variant falls within the genomic regions targeted by the population-based CAPP-Seq panel used in this study. 0 = variant falls outside the genomic regions targeted but within 500bp of a targeted base
+pass_basic_QC_coding	data filtering	Binary variable denoting whether a variant passes the filtering rules described in the "Error suppression and variant calling" section of the Methods and also falls in an exonic region.
+pass_basic_QC_nonsynon_lungdriver_hotspot	SNV model feature	Lung cancer hotspot: Binary feature denoting mutations in lung cancer driver genes with > 20 observations in COSMIC (CosmicGenomeScreens v85) and canonical activating mutations in EGFR, KRAS, NRAS and BRAF
+power_binary	SNV model feature	Variable denoting whether read support was observed for the variant in matched WBC gDNA as well as whether there was sufficient power to query the mutation in the WBC gDNA given the VAF of the variant in the cfDNA and positional depth of the variant in the WBCs.  -2 = sufficient power + more than one read in germline. -1 = insufficient power + more than one read in germline.  0 = insufficient power + less than one read in germline.  +1 = sufficient power + less than or equal one read in germline.
+Percent.mutant.allele	SNV model feature	Variant allele frequency (VAF %): Plasma variant allele frequency of the variant of interest
+pass_split_1yes	SNV model feature	Pass outlier cutoff: Binary variable denoting whether the VAF of the variant of interest is above a VAF threshold defined within each sample designed to identify putative low VAF outlier mutations
+duplex_reads	SNV model feature	Duplex support: Number of duplex cfDNA molecules supporting the variant of interest
+germline_NumNonZeroMeanAF_Pval	SNV model feature	Monte Carlo detection index P-value for support of the variant in WBC gDNA
+mean_bc_family_size	SNV model feature	Mean barcode family size: Average barcode family size (i.e. the average number of PCR duplicates supporting each unique cfDNA molecule) of barcode-deduplicated cfDNA molecules supporting the variant of interest
+watsoncrickfisher.p	SNV model feature	log10 of the P-value calculated by performing a two-sided Fisher’s Exact Test to compare the number of supporting reads mapping to the plus vs. minus strand of the genome
+mean_total_bc_errors_corrected	SNV model feature	UID error corrected: Average number of errors corrected in UIDs across all the cfDNA molecules supporting a variant
+mean_norm_varpos	SNV model feature	Variant position in read. The average normalized position of the variant across all sequencing reads supporting the variant
+mean_var_phred_score	SNV model feature	Phred quality: Average Phred quality score across all bases supporting the variant
+mean_num_non_ref_bases	SNV model feature	Average number of non-reference bases in reads supporting the variant
+fraction_MapQmin30	SNV model feature	Fraction of reads supporting the variant with a mapping quality score ≥ 30
+variant_norm_bc_fam_size	SNV model feature	Normalized barcode family size - Mean barcode family size of reads supporting the variant normalized by the mean barcode family size across all cfDNA molecules in the sample
+normalized_depth	SNV model feature	Normalized deduped depth at the variant position 
+gnomad_maxAF	SNV model feature	Maximum population allele frequency of the variant in WES and WGS data in the gnomAD database 
+base_change_transition	SNV model feature	Transition/transversion: Binary variable denoting if the base substitution of the variant is a transition or transversion
+LUNG_driver	SNV model feature	Binary variable denoting whether a mutation affects a putative lung cancer driver genes as identified by Bailey et al. Comprehensive Characterization of Cancer Driver Genes and Mutations. Cell 2018.
+pass_basic_QC_nonsynon_lungdriver	SNV model feature	Binary variable denoting whether a variant is a nonsynonymous mutation in a lung cancer driver gene
+ProbMin2ReadGerm_signed	SNV model feature	The probability of observing ≥ 2 supporting reads in the matched WBCs given the VAF of the variant in the cfDNA and positional depth of the variant in the WBCs
+germlinebg_Bayesian_pval	SNV model feature	WBC Bayesian background. See Supplemental Methods for description of this feature
+cfdnabg_Bayesian_pval	SNV model feature	cfDNA Bayesian background. See Supplemental Methods for description of this feature
+sum_log10_frag_size_enrich_score	SNV model feature	Short fragment score 2. See Supplemental Methods for the description of this feature
+C>AUnstranded	Patient-level SNV model feature	Binary variable denoting a C>A or G>T base substitution
+G>AUnstranded	Patient-level SNV model feature	Binary variable denoting a C>T or G>A base substitution
+A>CUnstranded	not used	Binary variable denoting a A>C or T>G base substitution
+A>GUnstranded	not used	Binary variable denoting a A>G or T>C base substitution
+A>TUnstranded	not used	Binary variable denoting a A>T or T>A base substitution
+C>GUnstranded	not used	Binary variable denoting a C>G or G>C base substitution
+CHIP	data filtering	Binary variable denoting the whether a mutation affects a gene canonically associated with clonal haematopoiesis (CH). The canonical CH genes covered by our panel (excluding TP53) were: ASXL1, PPM1D, DNMT3A, TET2, GNB1, CBL, JAK2, STAT3, GNAS, MYD88, SF3B1. Mutations in these genes were not considered in the CLiP model.
+germline_depth_at_position	variant information	Total depth at the genomic coordinate of the variant in matched WBC gDNA
+germline_reads	variant information	Variant read support in matched WBC gDNA
+Gene	variant information	Gene affected by the mutation
+size_selected_adjustment	SNV model feature	Short fragment score 1. See Supplemental Methods for description of this feature

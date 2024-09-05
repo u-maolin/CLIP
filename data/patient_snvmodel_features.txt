@@ -1,0 +1,14 @@
+SumP70
+SumP75
+SumP80
+SumP90
+SumP95
+Count
+MX
+meanAF
+smokingsig
+agingsig
+MX2
+MeanScore
+SumNegP25
+sumPassQC
